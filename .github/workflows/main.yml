@@ -1,0 +1,16 @@
+name: OnMergedPullRequest
+
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  track_merged_pr_job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Track merged PR
+      uses: takuya-kikuchi/action-track-merged-pr@v1
+      with:
+        REPOSITORY_OWNER_NAME: ${{ github.event.pull_request.base.repo.owner.login }}
+        REPOSITORY_NAME: ${{ github.event.pull_request.base.repo.name }}
+        MERGED_PR_NUMBER: ${{ github.event.pull_request.number }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
